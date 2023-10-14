@@ -2,39 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.ServiceProcess;
 using System.Text;
-using Orvado.IdleShutdown.Common;
+using System.Threading.Tasks;
 
-namespace Orvado.IdleShutdown
+namespace Keiqsa_IdleShutdown.Core
 {
-	static class Program
-	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		static void Main()
-		{
-			if (Environment.UserInteractive)
-			{
+    internal class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        static void Main(string[] args)
+        {
+            if (Environment.UserInteractive)
+            {
                 DisableConsoleQuickEdit.Go();
 
                 // This used to run the service as a console (development phase only)
                 var idleService = new IdleService();
-				idleService.Start();
+                idleService.Start();
 
-				Console.WriteLine(@"Press Enter to terminate ...");
-				Console.ReadKey();
-			}
-			else
-			{
-				ServiceBase[] servicesToRun =
-				{
-					new IdleService()
-				};
-				ServiceBase.Run(servicesToRun);
-			}
-		}
+                Console.WriteLine(@"Press Enter to terminate ...");
+                Console.ReadKey();
+            }
+        }
 
         static class DisableConsoleQuickEdit
         {
